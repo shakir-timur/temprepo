@@ -41,32 +41,29 @@ namespace HomeAccountant_MicrosTestProject
             this.FormClosed += FormClosedHandler;
         }
 
-
-
         public string ProfileName { get; }
 
         private void FormClosedHandler(object sender, FormClosedEventArgs e)
         {
-            var apps = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            var sett = apps.AppSettings.Settings;
-            var height = sett["height"];
-            var width = sett["width"];
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var appSettings = config.AppSettings.Settings;
+            var locale = appSettings["locale"];
+            var profile = appSettings["profile"];
 
-
-            if (height is null || width is null)
+            if (locale is null || profile is null)
             {
-                height = new KeyValueConfigurationElement("height", this.Height.ToString());
-                sett.Add(height);
-                width = new KeyValueConfigurationElement("width", this.Width.ToString());
-                sett.Add(width);
+                locale = new KeyValueConfigurationElement("locale", Locale.ResourceCultureName);
+                appSettings.Add(locale);
+                profile = new KeyValueConfigurationElement("profile", ProfileName);
+                appSettings.Add(profile);
             }
             else
             {
-                height.Value = this.Height.ToString();
-                width.Value = this.Width.ToString();
+                locale.Value = Locale.ResourceCultureName;
+                profile.Value = ProfileName;
             }
 
-            apps.Save(ConfigurationSaveMode.Modified);
+            config.Save(ConfigurationSaveMode.Modified);
 
             dataConnection.Dispose();
         }
@@ -78,14 +75,33 @@ namespace HomeAccountant_MicrosTestProject
         {
             this.Text = Locale.HomeFormTitle + $" ({ProfileName})";
             addExpenceTab.Text = Locale.AddExenceTabText;
-            WeekTab.Text = Locale.WeekTabName;
+            WeekTab.Text = Locale.WeekName;
             customPeriodTab.Text = Locale.CustomPeriodTabText;
             otherTab.Text = Locale.OtherTabName;
             changeLangLabel.Text = Locale.LanguageLabelText;
+            addRecordButton.Text = Locale.AddExenceTabText;
 
             dangerZoneGroupBox.Text = Locale.DangerZoneGbText;
             categoryControlGroupBox.Text = Locale.CategoryControlGbText;
             deleteProfileButton.Text = Locale.DeleteProfileButtonText;
+
+            weekShowAllCheckBox.Text = Locale.ShowAllTextBoxText;
+            weekGroupCheckBox.Text = Locale.GroupTextBoxText;
+            weekPrevButton.Text = Locale.PreviousButtonText;
+            weekNextButton.Text = Locale.NextButtonText;
+
+            customShowAllCheckBox.Text = Locale.ShowAllTextBoxText;
+            customGroupCheckBox.Text = Locale.GroupTextBoxText;
+            customNextButton.Text = Locale.NextButtonText;
+            customPrevButton.Text = Locale.PreviousButtonText;
+            monthRadioButton.Text = Locale.MonthTabName;
+            yearRadioButton.Text = Locale.YearName;
+            customDateRadioButton.Text = Locale.CustomPeriodTabText;
+
+            createCategoryLabel.Text = Locale.NewLabelText;
+            removeCategoryLabel.Text = Locale.RemoveLabelText;
+            addCategoryButton.Text = Locale.NewLabelText;
+            removeCategoryButton.Text = Locale.RemoveLabelText;
 
             LocaleSelector.SetComboboxDataSource(langSelectComboBox, langSelectComboBox_SelectedIndexChanged);
         }
@@ -95,9 +111,11 @@ namespace HomeAccountant_MicrosTestProject
             ComboBox[] boxes = new ComboBox[] { addRecordCategoryComboBox, weekCategoryComboBox,
                 customCategoryComboBox, removeCategoryComboBox };
 
+            var source = dataConnection.GetCategories(ProfileName).ToList();
+
             foreach (var box in boxes)
             {
-                box.DataSource = dataConnection.GetCategories(ProfileName).ToList();
+                box.DataSource = source;
                 box.DisplayMember = nameof(PurchaseCategory.Name);
             }
         }
@@ -111,8 +129,8 @@ namespace HomeAccountant_MicrosTestProject
 
         private void deleteProfileButton_Click(object sender, EventArgs e)
         {
-            bool okDel =
-                MessageBox.Show("Delete profile?", "Attension", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK;
+            bool okDel = MessageBox.Show($"{Locale.DeleteProfileQuestion}?", $"{Locale.Attention}",
+                MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK;
 
             if (okDel)
             {
@@ -127,7 +145,7 @@ namespace HomeAccountant_MicrosTestProject
         {
             ExpenceRecord record = new ExpenceRecord()
             {
-                Category = addRecordCategoryComboBox.SelectedItem as PurchaseCategory,
+                Category = (addRecordCategoryComboBox.SelectedItem as PurchaseCategory) ?? new PurchaseCategory() { Name = $"{Locale.NoCategory}" },
                 Price = priceNumericUpDown.Value,
                 Comment = commentTextBox.Text,
                 PurchaseDate = addDateTimePicker.Value
@@ -366,6 +384,14 @@ namespace HomeAccountant_MicrosTestProject
         {
             if (newCategoryTextBox.Text.Length > 0)
             {
+                var existingCats = removeCategoryComboBox.DataSource as List<PurchaseCategory>;
+
+                if (existingCats.Any(c => c.Name == newCategoryTextBox.Text))
+                {
+                    MessageBox.Show($"{Locale.CategoryExists}");
+                    return;
+                }
+
                 dataConnection.InsertCategory(ProfileName, new PurchaseCategory() { Name = newCategoryTextBox.Text });
                 newCategoryTextBox.Text = "";
                 BindCategoryItems();
@@ -376,7 +402,7 @@ namespace HomeAccountant_MicrosTestProject
         {
             if (removeCategoryComboBox.Items.Count == 1)
             {
-                MessageBox.Show("At least one category should remain", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"{Locale.OneCategoryShouldRemain}", $"{Locale.Error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

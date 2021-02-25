@@ -3,6 +3,7 @@ using HomeAccountant_MicrosTestProject.DataModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -19,6 +20,33 @@ namespace HomeAccountant_MicrosTestProject
             InitializeComponent();
 
             DataInit();
+
+            ApplySavedConfig();
+        }
+
+        private void ApplySavedConfig()
+        {
+            var config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            var appSettings = config.AppSettings.Settings;
+            var locale = appSettings["locale"];
+            var profile = appSettings["profile"];
+
+            if (locale != null )
+            {
+                int ind = languageComboBox.Items.IndexOf(locale.Value == "" ? "En" : locale.Value);
+                if (ind >= 0) languageComboBox.SelectedIndex = ind;
+            }
+
+            if (profile  != null)
+            {
+                string profileName = profile.Value;
+                var userProfile = profileListBox.Items.Cast<UserProfile>().Where(p => p.UserName == profileName).FirstOrDefault();
+                if (userProfile != null)
+                {
+                    int ind = profileListBox.Items.IndexOf(userProfile);
+                    if (ind >= 0) profileListBox.SelectedIndex = ind;
+                }
+            }
         }
 
         private void ValidateSelectButton()

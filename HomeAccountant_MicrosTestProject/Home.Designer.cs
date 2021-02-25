@@ -68,16 +68,16 @@ namespace HomeAccountant_MicrosTestProject
             this.customDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.otherTab = new System.Windows.Forms.TabPage();
             this.categoryControlGroupBox = new System.Windows.Forms.GroupBox();
+            this.removeCategoryButton = new System.Windows.Forms.Button();
+            this.addCategoryButton = new System.Windows.Forms.Button();
+            this.removeCategoryLabel = new System.Windows.Forms.Label();
+            this.createCategoryLabel = new System.Windows.Forms.Label();
+            this.newCategoryTextBox = new System.Windows.Forms.TextBox();
+            this.removeCategoryComboBox = new System.Windows.Forms.ComboBox();
             this.dangerZoneGroupBox = new System.Windows.Forms.GroupBox();
             this.deleteProfileButton = new System.Windows.Forms.Button();
             this.langSelectComboBox = new System.Windows.Forms.ComboBox();
             this.changeLangLabel = new System.Windows.Forms.Label();
-            this.removeCategoryComboBox = new System.Windows.Forms.ComboBox();
-            this.newCategoryTextBox = new System.Windows.Forms.TextBox();
-            this.addCategoryLabel = new System.Windows.Forms.Label();
-            this.removeCategoryLabel = new System.Windows.Forms.Label();
-            this.addCategoryButton = new System.Windows.Forms.Button();
-            this.removeCategoryButton = new System.Windows.Forms.Button();
             this.tabControlHome.SuspendLayout();
             this.addExpenceTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
@@ -505,7 +505,7 @@ namespace HomeAccountant_MicrosTestProject
             this.categoryControlGroupBox.Controls.Add(this.removeCategoryButton);
             this.categoryControlGroupBox.Controls.Add(this.addCategoryButton);
             this.categoryControlGroupBox.Controls.Add(this.removeCategoryLabel);
-            this.categoryControlGroupBox.Controls.Add(this.addCategoryLabel);
+            this.categoryControlGroupBox.Controls.Add(this.createCategoryLabel);
             this.categoryControlGroupBox.Controls.Add(this.newCategoryTextBox);
             this.categoryControlGroupBox.Controls.Add(this.removeCategoryComboBox);
             this.categoryControlGroupBox.Location = new System.Drawing.Point(9, 74);
@@ -515,6 +515,59 @@ namespace HomeAccountant_MicrosTestProject
             this.categoryControlGroupBox.TabIndex = 3;
             this.categoryControlGroupBox.TabStop = false;
             this.categoryControlGroupBox.Text = "Category Control";
+            // 
+            // removeCategoryButton
+            // 
+            this.removeCategoryButton.Location = new System.Drawing.Point(252, 108);
+            this.removeCategoryButton.Name = "removeCategoryButton";
+            this.removeCategoryButton.Size = new System.Drawing.Size(91, 28);
+            this.removeCategoryButton.TabIndex = 5;
+            this.removeCategoryButton.Text = "Remove";
+            this.removeCategoryButton.UseVisualStyleBackColor = true;
+            this.removeCategoryButton.Click += new System.EventHandler(this.removeCategoryButton_Click);
+            // 
+            // addCategoryButton
+            // 
+            this.addCategoryButton.Location = new System.Drawing.Point(252, 57);
+            this.addCategoryButton.Name = "addCategoryButton";
+            this.addCategoryButton.Size = new System.Drawing.Size(91, 28);
+            this.addCategoryButton.TabIndex = 4;
+            this.addCategoryButton.Text = "Add";
+            this.addCategoryButton.UseVisualStyleBackColor = true;
+            this.addCategoryButton.Click += new System.EventHandler(this.addCategoryButton_Click);
+            // 
+            // removeCategoryLabel
+            // 
+            this.removeCategoryLabel.AutoSize = true;
+            this.removeCategoryLabel.Location = new System.Drawing.Point(18, 115);
+            this.removeCategoryLabel.Name = "removeCategoryLabel";
+            this.removeCategoryLabel.Size = new System.Drawing.Size(60, 17);
+            this.removeCategoryLabel.TabIndex = 3;
+            this.removeCategoryLabel.Text = "Remove";
+            // 
+            // createCategoryLabel
+            // 
+            this.createCategoryLabel.AutoSize = true;
+            this.createCategoryLabel.Location = new System.Drawing.Point(18, 57);
+            this.createCategoryLabel.Name = "createCategoryLabel";
+            this.createCategoryLabel.Size = new System.Drawing.Size(39, 17);
+            this.createCategoryLabel.TabIndex = 2;
+            this.createCategoryLabel.Text = "New:";
+            // 
+            // newCategoryTextBox
+            // 
+            this.newCategoryTextBox.Location = new System.Drawing.Point(86, 57);
+            this.newCategoryTextBox.Name = "newCategoryTextBox";
+            this.newCategoryTextBox.Size = new System.Drawing.Size(138, 22);
+            this.newCategoryTextBox.TabIndex = 1;
+            // 
+            // removeCategoryComboBox
+            // 
+            this.removeCategoryComboBox.FormattingEnabled = true;
+            this.removeCategoryComboBox.Location = new System.Drawing.Point(86, 112);
+            this.removeCategoryComboBox.Name = "removeCategoryComboBox";
+            this.removeCategoryComboBox.Size = new System.Drawing.Size(138, 24);
+            this.removeCategoryComboBox.TabIndex = 0;
             // 
             // dangerZoneGroupBox
             // 
@@ -532,7 +585,7 @@ namespace HomeAccountant_MicrosTestProject
             // 
             // deleteProfileButton
             // 
-            this.deleteProfileButton.Location = new System.Drawing.Point(6, 35);
+            this.deleteProfileButton.Location = new System.Drawing.Point(21, 35);
             this.deleteProfileButton.Name = "deleteProfileButton";
             this.deleteProfileButton.Size = new System.Drawing.Size(144, 34);
             this.deleteProfileButton.TabIndex = 0;
@@ -551,64 +604,11 @@ namespace HomeAccountant_MicrosTestProject
             // changeLangLabel
             // 
             this.changeLangLabel.AutoSize = true;
-            this.changeLangLabel.Location = new System.Drawing.Point(6, 23);
+            this.changeLangLabel.Location = new System.Drawing.Point(27, 23);
             this.changeLangLabel.Name = "changeLangLabel";
             this.changeLangLabel.Size = new System.Drawing.Size(120, 17);
             this.changeLangLabel.TabIndex = 0;
             this.changeLangLabel.Text = "Change language";
-            // 
-            // removeCategoryComboBox
-            // 
-            this.removeCategoryComboBox.FormattingEnabled = true;
-            this.removeCategoryComboBox.Location = new System.Drawing.Point(86, 112);
-            this.removeCategoryComboBox.Name = "removeCategoryComboBox";
-            this.removeCategoryComboBox.Size = new System.Drawing.Size(138, 24);
-            this.removeCategoryComboBox.TabIndex = 0;
-            // 
-            // newCategoryTextBox
-            // 
-            this.newCategoryTextBox.Location = new System.Drawing.Point(86, 57);
-            this.newCategoryTextBox.Name = "newCategoryTextBox";
-            this.newCategoryTextBox.Size = new System.Drawing.Size(138, 22);
-            this.newCategoryTextBox.TabIndex = 1;
-            // 
-            // addCategoryLabel
-            // 
-            this.addCategoryLabel.AutoSize = true;
-            this.addCategoryLabel.Location = new System.Drawing.Point(18, 57);
-            this.addCategoryLabel.Name = "addCategoryLabel";
-            this.addCategoryLabel.Size = new System.Drawing.Size(39, 17);
-            this.addCategoryLabel.TabIndex = 2;
-            this.addCategoryLabel.Text = "New:";
-            // 
-            // removeCategoryLabel
-            // 
-            this.removeCategoryLabel.AutoSize = true;
-            this.removeCategoryLabel.Location = new System.Drawing.Point(18, 115);
-            this.removeCategoryLabel.Name = "removeCategoryLabel";
-            this.removeCategoryLabel.Size = new System.Drawing.Size(60, 17);
-            this.removeCategoryLabel.TabIndex = 3;
-            this.removeCategoryLabel.Text = "Remove";
-            // 
-            // addCategoryButton
-            // 
-            this.addCategoryButton.Location = new System.Drawing.Point(252, 57);
-            this.addCategoryButton.Name = "addCategoryButton";
-            this.addCategoryButton.Size = new System.Drawing.Size(91, 28);
-            this.addCategoryButton.TabIndex = 4;
-            this.addCategoryButton.Text = "Add";
-            this.addCategoryButton.UseVisualStyleBackColor = true;
-            this.addCategoryButton.Click += new System.EventHandler(this.addCategoryButton_Click);
-            // 
-            // removeCategoryButton
-            // 
-            this.removeCategoryButton.Location = new System.Drawing.Point(252, 108);
-            this.removeCategoryButton.Name = "removeCategoryButton";
-            this.removeCategoryButton.Size = new System.Drawing.Size(91, 28);
-            this.removeCategoryButton.TabIndex = 5;
-            this.removeCategoryButton.Text = "Remove";
-            this.removeCategoryButton.UseVisualStyleBackColor = true;
-            this.removeCategoryButton.Click += new System.EventHandler(this.removeCategoryButton_Click);
             // 
             // Home
             // 
@@ -687,7 +687,7 @@ namespace HomeAccountant_MicrosTestProject
         private System.Windows.Forms.Button removeCategoryButton;
         private System.Windows.Forms.Button addCategoryButton;
         private System.Windows.Forms.Label removeCategoryLabel;
-        private System.Windows.Forms.Label addCategoryLabel;
+        private System.Windows.Forms.Label createCategoryLabel;
         private System.Windows.Forms.TextBox newCategoryTextBox;
         private System.Windows.Forms.ComboBox removeCategoryComboBox;
     }

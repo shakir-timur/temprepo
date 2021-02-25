@@ -120,8 +120,14 @@
   <data name="AddExenceTabText" xml:space="preserve">
     <value>Добавить</value>
   </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
   <data name="CategoryControlGbText" xml:space="preserve">
     <value>Управление категориями</value>
+  </data>
+  <data name="CategoryExists" xml:space="preserve">
+    <value>Категория уже существует</value>
   </data>
   <data name="CreateProfileButtonText" xml:space="preserve">
     <value>Создать</value>
@@ -141,6 +147,18 @@
   <data name="DeleteProfileButtonText" xml:space="preserve">
     <value>Удалить профиль</value>
   </data>
+  <data name="DeleteProfileQuestion" xml:space="preserve">
+    <value>Удалить профиль и все данные</value>
+  </data>
+  <data name="EditRecordText" xml:space="preserve">
+    <value>Редактировать</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="GroupTextBoxText" xml:space="preserve">
+    <value>Группировать</value>
+  </data>
   <data name="HomeFormTitle" xml:space="preserve">
     <value>Бухгалтер</value>
   </data>
@@ -153,11 +171,32 @@
   <data name="MonthTabName" xml:space="preserve">
     <value>Месяц</value>
   </data>
+  <data name="NewLabelText" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="NextButtonText" xml:space="preserve">
+    <value>След.</value>
+  </data>
+  <data name="NoCategory" xml:space="preserve">
+    <value>Без категории</value>
+  </data>
+  <data name="OneCategoryShouldRemain" xml:space="preserve">
+    <value>Должна быть минимум одна категория</value>
+  </data>
   <data name="OtherTabName" xml:space="preserve">
     <value>Прочее</value>
   </data>
+  <data name="PreviousButtonText" xml:space="preserve">
+    <value>Пред.</value>
+  </data>
+  <data name="RemoveLabelText" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
   <data name="ResourceCultureName" xml:space="preserve">
     <value>ru-RU</value>
+  </data>
+  <data name="SaveButtonText" xml:space="preserve">
+    <value>Сохранить</value>
   </data>
   <data name="SelectProfileButtonText" xml:space="preserve">
     <value>Выбрать</value>
@@ -168,13 +207,16 @@
   <data name="SettingsTabText" xml:space="preserve">
     <value>Настройки</value>
   </data>
+  <data name="ShowAllTextBoxText" xml:space="preserve">
+    <value>Показать все</value>
+  </data>
   <data name="StartPageText" xml:space="preserve">
     <value>Бухгалтер - Старт</value>
   </data>
-  <data name="WeekTabName" xml:space="preserve">
+  <data name="WeekName" xml:space="preserve">
     <value>Неделя</value>
   </data>
-  <data name="YearTabName" xml:space="preserve">
+  <data name="YearName" xml:space="preserve">
     <value>Год</value>
   </data>
 </root>

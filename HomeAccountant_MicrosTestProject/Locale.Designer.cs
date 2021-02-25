@@ -70,11 +70,29 @@ namespace HomeAccountant_MicrosTestProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attention.
+        /// </summary>
+        internal static string Attention {
+            get {
+                return ResourceManager.GetString("Attention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category Control.
         /// </summary>
         internal static string CategoryControlGbText {
             get {
                 return ResourceManager.GetString("CategoryControlGbText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category already exists.
+        /// </summary>
+        internal static string CategoryExists {
+            get {
+                return ResourceManager.GetString("CategoryExists", resourceCulture);
             }
         }
         
@@ -133,6 +151,42 @@ namespace HomeAccountant_MicrosTestProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete Profile and all it&apos;s data.
+        /// </summary>
+        internal static string DeleteProfileQuestion {
+            get {
+                return ResourceManager.GetString("DeleteProfileQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit record.
+        /// </summary>
+        internal static string EditRecordText {
+            get {
+                return ResourceManager.GetString("EditRecordText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Group.
+        /// </summary>
+        internal static string GroupTextBoxText {
+            get {
+                return ResourceManager.GetString("GroupTextBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accountant.
         /// </summary>
         internal static string HomeFormTitle {
@@ -169,6 +223,42 @@ namespace HomeAccountant_MicrosTestProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        internal static string NewLabelText {
+            get {
+                return ResourceManager.GetString("NewLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        internal static string NextButtonText {
+            get {
+                return ResourceManager.GetString("NextButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No category.
+        /// </summary>
+        internal static string NoCategory {
+            get {
+                return ResourceManager.GetString("NoCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to At least one category should remain.
+        /// </summary>
+        internal static string OneCategoryShouldRemain {
+            get {
+                return ResourceManager.GetString("OneCategoryShouldRemain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other.
         /// </summary>
         internal static string OtherTabName {
@@ -178,11 +268,38 @@ namespace HomeAccountant_MicrosTestProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Prev..
+        /// </summary>
+        internal static string PreviousButtonText {
+            get {
+                return ResourceManager.GetString("PreviousButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        internal static string RemoveLabelText {
+            get {
+                return ResourceManager.GetString("RemoveLabelText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         internal static string ResourceCultureName {
             get {
                 return ResourceManager.GetString("ResourceCultureName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string SaveButtonText {
+            get {
+                return ResourceManager.GetString("SaveButtonText", resourceCulture);
             }
         }
         
@@ -214,6 +331,15 @@ namespace HomeAccountant_MicrosTestProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show All.
+        /// </summary>
+        internal static string ShowAllTextBoxText {
+            get {
+                return ResourceManager.GetString("ShowAllTextBoxText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accountant - Start.
         /// </summary>
         internal static string StartPageText {
@@ -225,18 +351,18 @@ namespace HomeAccountant_MicrosTestProject {
         /// <summary>
         ///   Looks up a localized string similar to Week.
         /// </summary>
-        internal static string WeekTabName {
+        internal static string WeekName {
             get {
-                return ResourceManager.GetString("WeekTabName", resourceCulture);
+                return ResourceManager.GetString("WeekName", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Year.
         /// </summary>
-        internal static string YearTabName {
+        internal static string YearName {
             get {
-                return ResourceManager.GetString("YearTabName", resourceCulture);
+                return ResourceManager.GetString("YearName", resourceCulture);
             }
         }
     }

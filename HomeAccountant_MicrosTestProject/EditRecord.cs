@@ -22,16 +22,31 @@ namespace HomeAccountant_MicrosTestProject
         {
             InitializeComponent();
 
+            LocaleInit();
+
             this.data = data;
             this.profileName = profileName;
             this.record = record;
 
             categoryComboBox.DataSource = data.GetCategories(profileName).ToList();
             categoryComboBox.DisplayMember = nameof(PurchaseCategory.Name);
-            categoryComboBox.SelectedText = record.Category.Name;
+            categoryComboBox.SelectedIndex = GetSelectedComboboxIndex(record.Category);
 
             commentTextBox.Text = record.Comment;
             priceNumericUpDown.Value = record.Price;
+        }
+
+        private void LocaleInit()
+        {
+            this.Text = Locale.EditRecordText;
+            button1.Text = Locale.SaveButtonText;
+        }
+
+        private int GetSelectedComboboxIndex(PurchaseCategory category)
+        {
+            int index = categoryComboBox.Items.IndexOf(category);
+
+            return index >= 0 ? index : 0;
         }
 
         private void button1_Click(object sender, EventArgs e)

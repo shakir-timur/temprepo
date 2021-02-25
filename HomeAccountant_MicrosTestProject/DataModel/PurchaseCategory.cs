@@ -15,5 +15,16 @@ namespace HomeAccountant_MicrosTestProject.DataModel
         {
             return Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            PurchaseCategory cat = obj as PurchaseCategory;
+            return cat != null && cat.Id == Id && cat.Name == Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }
