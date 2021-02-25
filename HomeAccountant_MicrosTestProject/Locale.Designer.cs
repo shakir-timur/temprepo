@@ -178,6 +178,15 @@ namespace HomeAccountant_MicrosTestProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate Random 10&apos;000 records.
+        /// </summary>
+        internal static string GenerateRandom {
+            get {
+                return ResourceManager.GetString("GenerateRandom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Group.
         /// </summary>
         internal static string GroupTextBoxText {

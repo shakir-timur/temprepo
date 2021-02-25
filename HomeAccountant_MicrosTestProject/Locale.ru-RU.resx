@@ -156,6 +156,9 @@
   <data name="Error" xml:space="preserve">
     <value>Ошибка</value>
   </data>
+  <data name="GenerateRandom" xml:space="preserve">
+    <value>Сгенерировать 10'000 записей</value>
+  </data>
   <data name="GroupTextBoxText" xml:space="preserve">
     <value>Группировать</value>
   </data>

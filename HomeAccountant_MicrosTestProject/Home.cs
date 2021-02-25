@@ -103,6 +103,8 @@ namespace HomeAccountant_MicrosTestProject
             addCategoryButton.Text = Locale.NewLabelText;
             removeCategoryButton.Text = Locale.RemoveLabelText;
 
+            generateRandom.Text = Locale.GenerateRandom;
+
             LocaleSelector.SetComboboxDataSource(langSelectComboBox, langSelectComboBox_SelectedIndexChanged);
         }
 
@@ -351,6 +353,7 @@ namespace HomeAccountant_MicrosTestProject
         private void UpdateCustomPeriodTabOnValueChanged(object sender, EventArgs e)
         {
             UpdateCustomPeriodDataGrid();
+            // TODO: decrease number of unnecessary updates
         }
 
         private void deleteContextMenuItem_Click(object sender, EventArgs e)
@@ -411,6 +414,11 @@ namespace HomeAccountant_MicrosTestProject
             dataConnection.RemoveCategory(ProfileName, category);
 
             BindCategoryItems();
+        }
+
+        private void generateRandom_Click(object sender, EventArgs e)
+        {
+            RandomDataGenerator.Generate(ProfileName, dataConnection);
         }
     }
 }

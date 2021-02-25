@@ -78,6 +78,7 @@ namespace HomeAccountant_MicrosTestProject
             this.deleteProfileButton = new System.Windows.Forms.Button();
             this.langSelectComboBox = new System.Windows.Forms.ComboBox();
             this.changeLangLabel = new System.Windows.Forms.Label();
+            this.generateRandom = new System.Windows.Forms.Button();
             this.tabControlHome.SuspendLayout();
             this.addExpenceTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
@@ -574,6 +575,7 @@ namespace HomeAccountant_MicrosTestProject
             this.dangerZoneGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dangerZoneGroupBox.Controls.Add(this.generateRandom);
             this.dangerZoneGroupBox.Controls.Add(this.deleteProfileButton);
             this.dangerZoneGroupBox.Location = new System.Drawing.Point(9, 287);
             this.dangerZoneGroupBox.MinimumSize = new System.Drawing.Size(0, 100);
@@ -609,6 +611,16 @@ namespace HomeAccountant_MicrosTestProject
             this.changeLangLabel.Size = new System.Drawing.Size(120, 17);
             this.changeLangLabel.TabIndex = 0;
             this.changeLangLabel.Text = "Change language";
+            // 
+            // generateRandom
+            // 
+            this.generateRandom.Location = new System.Drawing.Point(21, 144);
+            this.generateRandom.Name = "generateRandom";
+            this.generateRandom.Size = new System.Drawing.Size(144, 45);
+            this.generateRandom.TabIndex = 1;
+            this.generateRandom.Text = "Generate Random 10 000 records";
+            this.generateRandom.UseVisualStyleBackColor = true;
+            this.generateRandom.Click += new System.EventHandler(this.generateRandom_Click);
             // 
             // Home
             // 
@@ -690,6 +702,7 @@ namespace HomeAccountant_MicrosTestProject
         private System.Windows.Forms.Label createCategoryLabel;
         private System.Windows.Forms.TextBox newCategoryTextBox;
         private System.Windows.Forms.ComboBox removeCategoryComboBox;
+        private System.Windows.Forms.Button generateRandom;
     }
 }
 
