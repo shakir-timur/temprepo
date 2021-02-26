@@ -75,10 +75,10 @@ namespace HomeAccountant_MicrosTestProject
             this.newCategoryTextBox = new System.Windows.Forms.TextBox();
             this.removeCategoryComboBox = new System.Windows.Forms.ComboBox();
             this.dangerZoneGroupBox = new System.Windows.Forms.GroupBox();
+            this.generateRandom = new System.Windows.Forms.Button();
             this.deleteProfileButton = new System.Windows.Forms.Button();
             this.langSelectComboBox = new System.Windows.Forms.ComboBox();
             this.changeLangLabel = new System.Windows.Forms.Label();
-            this.generateRandom = new System.Windows.Forms.Button();
             this.tabControlHome.SuspendLayout();
             this.addExpenceTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
@@ -130,6 +130,7 @@ namespace HomeAccountant_MicrosTestProject
             this.dayDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.dayDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dayDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dayDataGridView.ContextMenuStrip = this.addDgwContextMenuStrip;
             this.dayDataGridView.Location = new System.Drawing.Point(6, 77);
@@ -280,6 +281,7 @@ namespace HomeAccountant_MicrosTestProject
             this.weekDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.weekDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.weekDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.weekDataGridView.Location = new System.Drawing.Point(15, 108);
             this.weekDataGridView.Name = "weekDataGridView";
@@ -360,9 +362,11 @@ namespace HomeAccountant_MicrosTestProject
             this.customDateDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.customDateDataGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.customDateDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.customDateDataGridView.Location = new System.Drawing.Point(6, 118);
             this.customDateDataGridView.Name = "customDateDataGridView";
+            this.customDateDataGridView.ReadOnly = true;
             this.customDateDataGridView.RowHeadersWidth = 51;
             this.customDateDataGridView.RowTemplate.Height = 24;
             this.customDateDataGridView.Size = new System.Drawing.Size(880, 376);
@@ -585,6 +589,16 @@ namespace HomeAccountant_MicrosTestProject
             this.dangerZoneGroupBox.TabStop = false;
             this.dangerZoneGroupBox.Text = "Danger Zone";
             // 
+            // generateRandom
+            // 
+            this.generateRandom.Location = new System.Drawing.Point(21, 144);
+            this.generateRandom.Name = "generateRandom";
+            this.generateRandom.Size = new System.Drawing.Size(144, 45);
+            this.generateRandom.TabIndex = 1;
+            this.generateRandom.Text = "Generate Random 10 000 records";
+            this.generateRandom.UseVisualStyleBackColor = true;
+            this.generateRandom.Click += new System.EventHandler(this.generateRandom_Click);
+            // 
             // deleteProfileButton
             // 
             this.deleteProfileButton.Location = new System.Drawing.Point(21, 35);
@@ -611,16 +625,6 @@ namespace HomeAccountant_MicrosTestProject
             this.changeLangLabel.Size = new System.Drawing.Size(120, 17);
             this.changeLangLabel.TabIndex = 0;
             this.changeLangLabel.Text = "Change language";
-            // 
-            // generateRandom
-            // 
-            this.generateRandom.Location = new System.Drawing.Point(21, 144);
-            this.generateRandom.Name = "generateRandom";
-            this.generateRandom.Size = new System.Drawing.Size(144, 45);
-            this.generateRandom.TabIndex = 1;
-            this.generateRandom.Text = "Generate Random 10 000 records";
-            this.generateRandom.UseVisualStyleBackColor = true;
-            this.generateRandom.Click += new System.EventHandler(this.generateRandom_Click);
             // 
             // Home
             // 

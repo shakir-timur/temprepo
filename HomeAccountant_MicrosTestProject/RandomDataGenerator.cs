@@ -15,7 +15,7 @@ namespace HomeAccountant_MicrosTestProject
         {
             var cats = data.GetCategories(profile).ToList();
 
-            for (int i = 0; i < 10000; i++)
+            for (int i = 0; i < 10_000; i++)
             {
                 string comment = adverbs[random.Next(adverbs.Length)] + " " + nouns[random.Next(nouns.Length)];
                 DateTime date = DateTime.Now.Date - TimeSpan.FromDays(random.Next(1000));
