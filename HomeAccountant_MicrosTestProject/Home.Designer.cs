@@ -32,6 +32,8 @@ namespace HomeAccountant_MicrosTestProject
             this.components = new System.ComponentModel.Container();
             this.tabControlHome = new System.Windows.Forms.TabControl();
             this.addExpenceTab = new System.Windows.Forms.TabPage();
+            this.IncomeRadioButton = new System.Windows.Forms.RadioButton();
+            this.ExpenceRadioButton = new System.Windows.Forms.RadioButton();
             this.dayDataGridView = new System.Windows.Forms.DataGridView();
             this.addDgwContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.editContextMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -79,6 +81,11 @@ namespace HomeAccountant_MicrosTestProject
             this.deleteProfileButton = new System.Windows.Forms.Button();
             this.langSelectComboBox = new System.Windows.Forms.ComboBox();
             this.changeLangLabel = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.saldoTextToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.saldoValueToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.addExpenceRadioButton = new System.Windows.Forms.RadioButton();
+            this.addIncomeRadioButton = new System.Windows.Forms.RadioButton();
             this.tabControlHome.SuspendLayout();
             this.addExpenceTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
@@ -91,6 +98,7 @@ namespace HomeAccountant_MicrosTestProject
             this.otherTab.SuspendLayout();
             this.categoryControlGroupBox.SuspendLayout();
             this.dangerZoneGroupBox.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControlHome
@@ -105,12 +113,14 @@ namespace HomeAccountant_MicrosTestProject
             this.tabControlHome.Location = new System.Drawing.Point(12, 12);
             this.tabControlHome.Name = "tabControlHome";
             this.tabControlHome.SelectedIndex = 0;
-            this.tabControlHome.Size = new System.Drawing.Size(900, 529);
+            this.tabControlHome.Size = new System.Drawing.Size(900, 501);
             this.tabControlHome.TabIndex = 0;
             this.tabControlHome.Selected += new System.Windows.Forms.TabControlEventHandler(this.tabControlHome_Selected);
             // 
             // addExpenceTab
             // 
+            this.addExpenceTab.Controls.Add(this.IncomeRadioButton);
+            this.addExpenceTab.Controls.Add(this.ExpenceRadioButton);
             this.addExpenceTab.Controls.Add(this.dayDataGridView);
             this.addExpenceTab.Controls.Add(this.priceNumericUpDown);
             this.addExpenceTab.Controls.Add(this.addRecordButton);
@@ -120,10 +130,33 @@ namespace HomeAccountant_MicrosTestProject
             this.addExpenceTab.Location = new System.Drawing.Point(4, 25);
             this.addExpenceTab.Name = "addExpenceTab";
             this.addExpenceTab.Padding = new System.Windows.Forms.Padding(3);
-            this.addExpenceTab.Size = new System.Drawing.Size(892, 500);
+            this.addExpenceTab.Size = new System.Drawing.Size(892, 472);
             this.addExpenceTab.TabIndex = 0;
             this.addExpenceTab.Text = "Add new";
             this.addExpenceTab.UseVisualStyleBackColor = true;
+            // 
+            // IncomeRadioButton
+            // 
+            this.IncomeRadioButton.AutoSize = true;
+            this.IncomeRadioButton.Location = new System.Drawing.Point(147, 10);
+            this.IncomeRadioButton.Name = "IncomeRadioButton";
+            this.IncomeRadioButton.Size = new System.Drawing.Size(74, 21);
+            this.IncomeRadioButton.TabIndex = 8;
+            this.IncomeRadioButton.Text = "Income";
+            this.IncomeRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // ExpenceRadioButton
+            // 
+            this.ExpenceRadioButton.AutoSize = true;
+            this.ExpenceRadioButton.Checked = true;
+            this.ExpenceRadioButton.Location = new System.Drawing.Point(20, 10);
+            this.ExpenceRadioButton.Name = "ExpenceRadioButton";
+            this.ExpenceRadioButton.Size = new System.Drawing.Size(83, 21);
+            this.ExpenceRadioButton.TabIndex = 7;
+            this.ExpenceRadioButton.TabStop = true;
+            this.ExpenceRadioButton.Text = "Expence";
+            this.ExpenceRadioButton.UseVisualStyleBackColor = true;
+            this.ExpenceRadioButton.CheckedChanged += new System.EventHandler(this.recordTypeRadioButton_CheckedChanged);
             // 
             // dayDataGridView
             // 
@@ -139,7 +172,7 @@ namespace HomeAccountant_MicrosTestProject
             this.dayDataGridView.ReadOnly = true;
             this.dayDataGridView.RowHeadersWidth = 51;
             this.dayDataGridView.RowTemplate.Height = 24;
-            this.dayDataGridView.Size = new System.Drawing.Size(880, 417);
+            this.dayDataGridView.Size = new System.Drawing.Size(880, 389);
             this.dayDataGridView.TabIndex = 6;
             // 
             // addDgwContextMenuStrip
@@ -168,7 +201,7 @@ namespace HomeAccountant_MicrosTestProject
             // priceNumericUpDown
             // 
             this.priceNumericUpDown.DecimalPlaces = 2;
-            this.priceNumericUpDown.Location = new System.Drawing.Point(664, 25);
+            this.priceNumericUpDown.Location = new System.Drawing.Point(663, 37);
             this.priceNumericUpDown.Maximum = new decimal(new int[] {
             2000000000,
             0,
@@ -180,9 +213,9 @@ namespace HomeAccountant_MicrosTestProject
             // 
             // addRecordButton
             // 
-            this.addRecordButton.Location = new System.Drawing.Point(776, 25);
+            this.addRecordButton.Location = new System.Drawing.Point(788, 35);
             this.addRecordButton.Name = "addRecordButton";
-            this.addRecordButton.Size = new System.Drawing.Size(98, 24);
+            this.addRecordButton.Size = new System.Drawing.Size(98, 25);
             this.addRecordButton.TabIndex = 5;
             this.addRecordButton.Text = "Add record";
             this.addRecordButton.UseVisualStyleBackColor = true;
@@ -190,14 +223,14 @@ namespace HomeAccountant_MicrosTestProject
             // 
             // commentTextBox
             // 
-            this.commentTextBox.Location = new System.Drawing.Point(399, 25);
+            this.commentTextBox.Location = new System.Drawing.Point(399, 37);
             this.commentTextBox.Name = "commentTextBox";
             this.commentTextBox.Size = new System.Drawing.Size(258, 22);
             this.commentTextBox.TabIndex = 3;
             // 
             // addDateTimePicker
             // 
-            this.addDateTimePicker.Location = new System.Drawing.Point(21, 25);
+            this.addDateTimePicker.Location = new System.Drawing.Point(20, 37);
             this.addDateTimePicker.Name = "addDateTimePicker";
             this.addDateTimePicker.Size = new System.Drawing.Size(200, 22);
             this.addDateTimePicker.TabIndex = 1;
@@ -206,7 +239,7 @@ namespace HomeAccountant_MicrosTestProject
             // addRecordCategoryComboBox
             // 
             this.addRecordCategoryComboBox.FormattingEnabled = true;
-            this.addRecordCategoryComboBox.Location = new System.Drawing.Point(239, 25);
+            this.addRecordCategoryComboBox.Location = new System.Drawing.Point(239, 37);
             this.addRecordCategoryComboBox.Name = "addRecordCategoryComboBox";
             this.addRecordCategoryComboBox.Size = new System.Drawing.Size(154, 24);
             this.addRecordCategoryComboBox.TabIndex = 2;
@@ -226,7 +259,7 @@ namespace HomeAccountant_MicrosTestProject
             this.WeekTab.Location = new System.Drawing.Point(4, 25);
             this.WeekTab.Name = "WeekTab";
             this.WeekTab.Padding = new System.Windows.Forms.Padding(3);
-            this.WeekTab.Size = new System.Drawing.Size(892, 500);
+            this.WeekTab.Size = new System.Drawing.Size(892, 472);
             this.WeekTab.TabIndex = 1;
             this.WeekTab.Text = "Week";
             this.WeekTab.UseVisualStyleBackColor = true;
@@ -288,7 +321,7 @@ namespace HomeAccountant_MicrosTestProject
             this.weekDataGridView.ReadOnly = true;
             this.weekDataGridView.RowHeadersWidth = 51;
             this.weekDataGridView.RowTemplate.Height = 24;
-            this.weekDataGridView.Size = new System.Drawing.Size(871, 386);
+            this.weekDataGridView.Size = new System.Drawing.Size(871, 358);
             this.weekDataGridView.TabIndex = 4;
             // 
             // weekGroupCheckBox
@@ -296,7 +329,7 @@ namespace HomeAccountant_MicrosTestProject
             this.weekGroupCheckBox.AutoSize = true;
             this.weekGroupCheckBox.Checked = true;
             this.weekGroupCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.weekGroupCheckBox.Location = new System.Drawing.Point(598, 17);
+            this.weekGroupCheckBox.Location = new System.Drawing.Point(598, 23);
             this.weekGroupCheckBox.Name = "weekGroupCheckBox";
             this.weekGroupCheckBox.Size = new System.Drawing.Size(70, 21);
             this.weekGroupCheckBox.TabIndex = 3;
@@ -307,7 +340,7 @@ namespace HomeAccountant_MicrosTestProject
             // weekCategoryComboBox
             // 
             this.weekCategoryComboBox.FormattingEnabled = true;
-            this.weekCategoryComboBox.Location = new System.Drawing.Point(373, 15);
+            this.weekCategoryComboBox.Location = new System.Drawing.Point(356, 19);
             this.weekCategoryComboBox.Name = "weekCategoryComboBox";
             this.weekCategoryComboBox.Size = new System.Drawing.Size(195, 24);
             this.weekCategoryComboBox.TabIndex = 2;
@@ -352,7 +385,7 @@ namespace HomeAccountant_MicrosTestProject
             this.customPeriodTab.Location = new System.Drawing.Point(4, 25);
             this.customPeriodTab.Name = "customPeriodTab";
             this.customPeriodTab.Padding = new System.Windows.Forms.Padding(3);
-            this.customPeriodTab.Size = new System.Drawing.Size(892, 500);
+            this.customPeriodTab.Size = new System.Drawing.Size(892, 472);
             this.customPeriodTab.TabIndex = 3;
             this.customPeriodTab.Text = "Custom Period";
             this.customPeriodTab.UseVisualStyleBackColor = true;
@@ -369,7 +402,7 @@ namespace HomeAccountant_MicrosTestProject
             this.customDateDataGridView.ReadOnly = true;
             this.customDateDataGridView.RowHeadersWidth = 51;
             this.customDateDataGridView.RowTemplate.Height = 24;
-            this.customDateDataGridView.Size = new System.Drawing.Size(880, 376);
+            this.customDateDataGridView.Size = new System.Drawing.Size(880, 348);
             this.customDateDataGridView.TabIndex = 12;
             // 
             // customNextButton
@@ -498,7 +531,7 @@ namespace HomeAccountant_MicrosTestProject
             this.otherTab.Location = new System.Drawing.Point(4, 25);
             this.otherTab.Name = "otherTab";
             this.otherTab.Padding = new System.Windows.Forms.Padding(3);
-            this.otherTab.Size = new System.Drawing.Size(892, 500);
+            this.otherTab.Size = new System.Drawing.Size(892, 472);
             this.otherTab.TabIndex = 5;
             this.otherTab.Text = "Other";
             this.otherTab.UseVisualStyleBackColor = true;
@@ -507,6 +540,8 @@ namespace HomeAccountant_MicrosTestProject
             // 
             this.categoryControlGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.categoryControlGroupBox.Controls.Add(this.addIncomeRadioButton);
+            this.categoryControlGroupBox.Controls.Add(this.addExpenceRadioButton);
             this.categoryControlGroupBox.Controls.Add(this.removeCategoryButton);
             this.categoryControlGroupBox.Controls.Add(this.addCategoryButton);
             this.categoryControlGroupBox.Controls.Add(this.removeCategoryLabel);
@@ -523,7 +558,7 @@ namespace HomeAccountant_MicrosTestProject
             // 
             // removeCategoryButton
             // 
-            this.removeCategoryButton.Location = new System.Drawing.Point(252, 108);
+            this.removeCategoryButton.Location = new System.Drawing.Point(252, 143);
             this.removeCategoryButton.Name = "removeCategoryButton";
             this.removeCategoryButton.Size = new System.Drawing.Size(91, 28);
             this.removeCategoryButton.TabIndex = 5;
@@ -533,7 +568,7 @@ namespace HomeAccountant_MicrosTestProject
             // 
             // addCategoryButton
             // 
-            this.addCategoryButton.Location = new System.Drawing.Point(252, 57);
+            this.addCategoryButton.Location = new System.Drawing.Point(252, 81);
             this.addCategoryButton.Name = "addCategoryButton";
             this.addCategoryButton.Size = new System.Drawing.Size(91, 28);
             this.addCategoryButton.TabIndex = 4;
@@ -544,7 +579,7 @@ namespace HomeAccountant_MicrosTestProject
             // removeCategoryLabel
             // 
             this.removeCategoryLabel.AutoSize = true;
-            this.removeCategoryLabel.Location = new System.Drawing.Point(18, 115);
+            this.removeCategoryLabel.Location = new System.Drawing.Point(18, 143);
             this.removeCategoryLabel.Name = "removeCategoryLabel";
             this.removeCategoryLabel.Size = new System.Drawing.Size(60, 17);
             this.removeCategoryLabel.TabIndex = 3;
@@ -553,7 +588,7 @@ namespace HomeAccountant_MicrosTestProject
             // createCategoryLabel
             // 
             this.createCategoryLabel.AutoSize = true;
-            this.createCategoryLabel.Location = new System.Drawing.Point(18, 57);
+            this.createCategoryLabel.Location = new System.Drawing.Point(18, 46);
             this.createCategoryLabel.Name = "createCategoryLabel";
             this.createCategoryLabel.Size = new System.Drawing.Size(39, 17);
             this.createCategoryLabel.TabIndex = 2;
@@ -561,7 +596,7 @@ namespace HomeAccountant_MicrosTestProject
             // 
             // newCategoryTextBox
             // 
-            this.newCategoryTextBox.Location = new System.Drawing.Point(86, 57);
+            this.newCategoryTextBox.Location = new System.Drawing.Point(86, 84);
             this.newCategoryTextBox.Name = "newCategoryTextBox";
             this.newCategoryTextBox.Size = new System.Drawing.Size(138, 22);
             this.newCategoryTextBox.TabIndex = 1;
@@ -569,7 +604,7 @@ namespace HomeAccountant_MicrosTestProject
             // removeCategoryComboBox
             // 
             this.removeCategoryComboBox.FormattingEnabled = true;
-            this.removeCategoryComboBox.Location = new System.Drawing.Point(86, 112);
+            this.removeCategoryComboBox.Location = new System.Drawing.Point(86, 143);
             this.removeCategoryComboBox.Name = "removeCategoryComboBox";
             this.removeCategoryComboBox.Size = new System.Drawing.Size(138, 24);
             this.removeCategoryComboBox.TabIndex = 0;
@@ -584,14 +619,14 @@ namespace HomeAccountant_MicrosTestProject
             this.dangerZoneGroupBox.Location = new System.Drawing.Point(9, 287);
             this.dangerZoneGroupBox.MinimumSize = new System.Drawing.Size(0, 100);
             this.dangerZoneGroupBox.Name = "dangerZoneGroupBox";
-            this.dangerZoneGroupBox.Size = new System.Drawing.Size(810, 207);
+            this.dangerZoneGroupBox.Size = new System.Drawing.Size(810, 179);
             this.dangerZoneGroupBox.TabIndex = 2;
             this.dangerZoneGroupBox.TabStop = false;
             this.dangerZoneGroupBox.Text = "Danger Zone";
             // 
             // generateRandom
             // 
-            this.generateRandom.Location = new System.Drawing.Point(21, 144);
+            this.generateRandom.Location = new System.Drawing.Point(21, 112);
             this.generateRandom.Name = "generateRandom";
             this.generateRandom.Size = new System.Drawing.Size(144, 45);
             this.generateRandom.TabIndex = 1;
@@ -626,11 +661,58 @@ namespace HomeAccountant_MicrosTestProject
             this.changeLangLabel.TabIndex = 0;
             this.changeLangLabel.Text = "Change language";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saldoTextToolStripStatusLabel,
+            this.saldoValueToolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 523);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(924, 26);
+            this.statusStrip1.TabIndex = 1;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // saldoTextToolStripStatusLabel
+            // 
+            this.saldoTextToolStripStatusLabel.Name = "saldoTextToolStripStatusLabel";
+            this.saldoTextToolStripStatusLabel.Size = new System.Drawing.Size(50, 20);
+            this.saldoTextToolStripStatusLabel.Text = "Saldo:";
+            // 
+            // saldoValueToolStripStatusLabel
+            // 
+            this.saldoValueToolStripStatusLabel.Name = "saldoValueToolStripStatusLabel";
+            this.saldoValueToolStripStatusLabel.Size = new System.Drawing.Size(15, 20);
+            this.saldoValueToolStripStatusLabel.Text = "-";
+            // 
+            // addExpenceRadioButton
+            // 
+            this.addExpenceRadioButton.AutoSize = true;
+            this.addExpenceRadioButton.Checked = true;
+            this.addExpenceRadioButton.Location = new System.Drawing.Point(86, 46);
+            this.addExpenceRadioButton.Name = "addExpenceRadioButton";
+            this.addExpenceRadioButton.Size = new System.Drawing.Size(83, 21);
+            this.addExpenceRadioButton.TabIndex = 6;
+            this.addExpenceRadioButton.TabStop = true;
+            this.addExpenceRadioButton.Text = "Expence";
+            this.addExpenceRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // addIncomeRadioButton
+            // 
+            this.addIncomeRadioButton.AutoSize = true;
+            this.addIncomeRadioButton.Location = new System.Drawing.Point(184, 46);
+            this.addIncomeRadioButton.Name = "addIncomeRadioButton";
+            this.addIncomeRadioButton.Size = new System.Drawing.Size(74, 21);
+            this.addIncomeRadioButton.TabIndex = 7;
+            this.addIncomeRadioButton.Text = "Income";
+            this.addIncomeRadioButton.UseVisualStyleBackColor = true;
+            // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(924, 553);
+            this.ClientSize = new System.Drawing.Size(924, 549);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlHome);
             this.MinimumSize = new System.Drawing.Size(18, 500);
             this.Name = "Home";
@@ -652,7 +734,10 @@ namespace HomeAccountant_MicrosTestProject
             this.categoryControlGroupBox.ResumeLayout(false);
             this.categoryControlGroupBox.PerformLayout();
             this.dangerZoneGroupBox.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -707,6 +792,13 @@ namespace HomeAccountant_MicrosTestProject
         private System.Windows.Forms.TextBox newCategoryTextBox;
         private System.Windows.Forms.ComboBox removeCategoryComboBox;
         private System.Windows.Forms.Button generateRandom;
+        private System.Windows.Forms.RadioButton IncomeRadioButton;
+        private System.Windows.Forms.RadioButton ExpenceRadioButton;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel saldoTextToolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel saldoValueToolStripStatusLabel;
+        private System.Windows.Forms.RadioButton addIncomeRadioButton;
+        private System.Windows.Forms.RadioButton addExpenceRadioButton;
     }
 }
 

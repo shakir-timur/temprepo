@@ -135,9 +135,18 @@ namespace HomeAccountant_MicrosTestProject {
         /// <summary>
         ///   Looks up a localized string similar to Food &amp; Drinks;Transport;Cell payment;Internet;Entertainment.
         /// </summary>
-        internal static string DefaultCategoryNames {
+        internal static string DefaultExpenceCategoryNames {
             get {
-                return ResourceManager.GetString("DefaultCategoryNames", resourceCulture);
+                return ResourceManager.GetString("DefaultExpenceCategoryNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Salary;Pension;Month Bonus;Advance Payment;Side job.
+        /// </summary>
+        internal static string DefaultIncomeCategoryNames {
+            get {
+                return ResourceManager.GetString("DefaultIncomeCategoryNames", resourceCulture);
             }
         }
         

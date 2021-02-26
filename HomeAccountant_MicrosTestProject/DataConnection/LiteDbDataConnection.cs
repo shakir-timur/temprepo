@@ -9,11 +9,12 @@ using System.IO;
 
 namespace HomeAccountant_MicrosTestProject.DataConnection
 {
-    class LiteDbDataConnection : IDataConnection
+    class LiteDbDataConnection : IDbDataConnection
     {
         const string profileDbName = "profiles.db";
         const string profilesTable = "profiles";
-        const string categoryTable = "categories";
+        const string expenceCategories = "expence";
+        const string incomeCategories = "income";
         const string recordsTable = "records";
         const string profileDirName = "Profiles";
 
@@ -43,7 +44,7 @@ namespace HomeAccountant_MicrosTestProject.DataConnection
             return Profiles.FindAll();
         }
 
-        public bool CreateUserProfile(string userProfileName, string[] defaultCategories)
+        public bool CreateUserProfile(string userProfileName, string[] defaultExpenceCategories, string[] defaultIncomeCategories)
         {
             var profile = new UserProfile()
             {
@@ -55,7 +56,8 @@ namespace HomeAccountant_MicrosTestProject.DataConnection
 
             recordsDb = new LiteDatabase(Path.Combine(".", profileDirName, profile.UserUID));
 
-            recordsDb.GetCollection<PurchaseCategory>(categoryTable).InsertBulk(defaultCategories.Select(cat => new PurchaseCategory() { Name = cat }));
+            recordsDb.GetCollection<RecordCategory>(expenceCategories).InsertBulk(defaultExpenceCategories.Select(cat => new RecordCategory() { Name = cat }));
+            recordsDb.GetCollection<RecordCategory>(incomeCategories).InsertBulk(defaultIncomeCategories.Select(cat => new RecordCategory() { Name = cat }));
 
             return true;
         }
@@ -71,26 +73,31 @@ namespace HomeAccountant_MicrosTestProject.DataConnection
             return Profiles.Delete(profile.Id);
         }
 
-        public IEnumerable<ExpenceRecord> GetExpenceRecords(string userProfileName, DateTime start, DateTime end)
+        public IEnumerable<AccountRecord> GetAccountRecords(string userProfileName, DateTime start, DateTime end)
         {
-            var records = recordsDb.GetCollection<ExpenceRecord>(recordsTable);
+            var records = recordsDb.GetCollection<AccountRecord>(recordsTable);
 
-            return records.Query().Where(r => r.PurchaseDate >= start && r.PurchaseDate < end).ToEnumerable();
+            return records.Query().Where(r => r.RecordDate >= start && r.RecordDate < end).ToEnumerable();
         }
 
-        public int InsertExpenseRecord(string userProfileName, ExpenceRecord record)
+        public int InsertAccountRecord(string userProfileName, AccountRecord record)
         {
-            return recordsDb.GetCollection<ExpenceRecord>(recordsTable).Insert(record);
+            return recordsDb.GetCollection<AccountRecord>(recordsTable).Insert(record);
         }
 
-        public bool UpdateExpenceRecord(string userProfileName, ExpenceRecord record)
+        public int InsertBulkRecords(string userProfileName, IEnumerable<AccountRecord> records)
         {
-            return recordsDb.GetCollection<ExpenceRecord>(recordsTable).Update(record);
+            return recordsDb.GetCollection<AccountRecord>(recordsTable).InsertBulk(records);
         }
 
-        public bool RemoveExpenceRecord(string userProfileName, ExpenceRecord record)
+        public bool UpdateAccountRecord(string userProfileName, AccountRecord record)
         {
-            return recordsDb.GetCollection<ExpenceRecord>(recordsTable).Delete(record.Id);
+            return recordsDb.GetCollection<AccountRecord>(recordsTable).Update(record);
+        }
+
+        public bool RemoveAccountRecord(string userProfileName, AccountRecord record)
+        {
+            return recordsDb.GetCollection<AccountRecord>(recordsTable).Delete(record.Id);
         }
 
         public void Dispose()
@@ -99,27 +106,41 @@ namespace HomeAccountant_MicrosTestProject.DataConnection
             recordsDb?.Dispose();
         }
 
-        public IEnumerable<PurchaseCategory> GetCategories(string userProfileName)
+        public IEnumerable<RecordCategory> GetIncomeCategories(string userProfileName)
         {
-            var categories = recordsDb.GetCollection<PurchaseCategory>(categoryTable);
+            var categories = recordsDb.GetCollection<RecordCategory>(incomeCategories);
             return categories.FindAll();
         }
 
-        public int InsertCategory(string userProfileName, PurchaseCategory category)
+        public IEnumerable<RecordCategory> GetExpenceCategories(string userProfileName)
         {
-            return recordsDb.GetCollection<PurchaseCategory>(categoryTable).Insert(category);
+            var categories = recordsDb.GetCollection<RecordCategory>(expenceCategories);
+            return categories.FindAll();
         }
 
-        public bool RenameCategory(string userProfileName, PurchaseCategory category, string newCategoryName)
+        public int InsertIncomeCategory(string userProfileName, RecordCategory category)
         {
-            throw new NotImplementedException();
+            return recordsDb.GetCollection<RecordCategory>(incomeCategories).Insert(category);
         }
 
-        public bool RemoveCategory(string userProfileName, PurchaseCategory category)
+        public int InsertExpenceCategory(string userProfileName, RecordCategory category)
         {
-            return recordsDb.GetCollection<PurchaseCategory>(categoryTable).Delete(category.Id);
+            return recordsDb.GetCollection<RecordCategory>(expenceCategories).Insert(category);
         }
 
-        
+        public bool RemoveCategory(string userProfileName, RecordCategory category)
+        {
+            if (recordsDb.GetCollection<RecordCategory>(expenceCategories).Exists(c => c.Id == category.Id && c.Name == category.Name))
+            {
+                return recordsDb.GetCollection<RecordCategory>(expenceCategories).Delete(category.Id);
+            }
+            if (recordsDb.GetCollection<RecordCategory>(incomeCategories).Exists(c => c.Id == category.Id && c.Name == category.Name))
+            {
+                return recordsDb.GetCollection<RecordCategory>(incomeCategories).Delete(category.Id);
+            }
+
+            return false;
+        }
+
     }
 }

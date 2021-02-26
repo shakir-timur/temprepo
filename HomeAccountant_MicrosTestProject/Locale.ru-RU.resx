@@ -141,8 +141,11 @@
   <data name="DangerZoneGbText" xml:space="preserve">
     <value>Опасная зона</value>
   </data>
-  <data name="DefaultCategoryNames" xml:space="preserve">
+  <data name="DefaultExpenceCategoryNames" xml:space="preserve">
     <value>Продукты питания;Транспорт;Мобильная связь;Интернет;Развлечения</value>
+  </data>
+  <data name="DefaultIncomeCategoryNames" xml:space="preserve">
+    <value>Зарплата;Пенсия;Премия;Аванс;Халтурка</value>
   </data>
   <data name="DeleteProfileButtonText" xml:space="preserve">
     <value>Удалить профиль</value>

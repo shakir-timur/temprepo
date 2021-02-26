@@ -15,7 +15,7 @@ namespace HomeAccountant_MicrosTestProject
 {
     public partial class Home : Form
     {
-        IDataConnection dataConnection;
+        IDbDataConnection dataConnection;
         Dictionary<TabPage, Action> pageChangeDelegates;
 
         public Home(string profileName)
@@ -113,16 +113,22 @@ namespace HomeAccountant_MicrosTestProject
 
         private void BindCategoryItems()
         {
-            ComboBox[] boxes = new ComboBox[] { addRecordCategoryComboBox, weekCategoryComboBox,
+            ComboBox[] boxes = new ComboBox[] { weekCategoryComboBox,
                 customCategoryComboBox, removeCategoryComboBox };
 
-            var source = dataConnection.GetCategories(ProfileName).ToList();
+            var expSource = dataConnection.GetExpenceCategories(ProfileName).ToList();
+            var incSource = dataConnection.GetIncomeCategories(ProfileName).ToList();
+            var allCats = expSource.Concat(incSource).ToList();
 
             foreach (var box in boxes)
             {
-                box.DataSource = source;
-                box.DisplayMember = nameof(PurchaseCategory.Name);
+                box.DataSource = allCats;
+                box.DisplayMember = nameof(RecordCategory.Name);
+                if (box.Items.Count == 0) box.Text = "";
             }
+
+            addRecordCategoryComboBox.DataSource = ExpenceRadioButton.Checked ? expSource : incSource;
+            if (addRecordCategoryComboBox.Items.Count == 0) addRecordCategoryComboBox.Text = "";
         }
 
 
@@ -148,15 +154,16 @@ namespace HomeAccountant_MicrosTestProject
 
         private void addRecordButton_Click(object sender, EventArgs e)
         {
-            ExpenceRecord record = new ExpenceRecord()
+            AccountRecord record = new AccountRecord()
             {
-                Category = (addRecordCategoryComboBox.SelectedItem as PurchaseCategory) ?? new PurchaseCategory() { Name = $"{Locale.NoCategory}" },
-                Price = priceNumericUpDown.Value,
+                RecordType = ExpenceRadioButton.Checked ? AccountRecordType.Expence : AccountRecordType.Income,
+                Category = (addRecordCategoryComboBox.SelectedItem as RecordCategory) ?? new RecordCategory() { Name = $"{Locale.NoCategory}" },
+                Amount = priceNumericUpDown.Value,
                 Comment = commentTextBox.Text,
-                PurchaseDate = addDateTimePicker.Value
+                RecordDate = addDateTimePicker.Value
             };
 
-            dataConnection.InsertExpenseRecord(ProfileName, record);
+            dataConnection.InsertAccountRecord(ProfileName, record);
 
             UpdateAddDataGrid();
         }
@@ -168,12 +175,12 @@ namespace HomeAccountant_MicrosTestProject
 
         private void UpdateAddDataGrid()
         {
-
             DateTime start = addDateTimePicker.Value.Date;
             DateTime stop = addDateTimePicker.Value.Date + TimeSpan.FromDays(1);
+            var records = dataConnection.GetAccountRecords(ProfileName, start, stop).ToList();
+            dayDataGridView.DataSource = records;
 
-            dayDataGridView.DataSource = dataConnection.GetExpenceRecords(ProfileName, start, stop).ToList();
-
+            UpdateSaldoStatus(records);
         }
 
         private void UpdateWeekDataGrid() => UpdateWeekDataGrid(0);
@@ -202,20 +209,22 @@ namespace HomeAccountant_MicrosTestProject
             {
                 weekDataGridView.DataSource = records
                     .GroupBy(r => r.Category.Name)
-                    .Select(g => new { Category = g.Key, Total = g.Sum(r => r.Price) }).ToList();
+                    .Select(g => new { Category = g.Key, Total = g.Sum(r => r.Amount) }).ToList();
             }
             else
             {
                 weekDataGridView.DataSource = records.ToList();
             }
+
+            UpdateSaldoStatus(records);
         }
 
-        IEnumerable<ExpenceRecord> GetRecordsFromTo(DateTime start, DateTime stop)
+        IEnumerable<AccountRecord> GetRecordsFromTo(DateTime start, DateTime stop)
         {
-            return dataConnection.GetExpenceRecords(ProfileName, start, stop).ToList();
+            return dataConnection.GetAccountRecords(ProfileName, start, stop).ToList();
         }
 
-        IEnumerable<ExpenceRecord> FilterByCategory(IEnumerable<ExpenceRecord> records, string categoryName)
+        IEnumerable<AccountRecord> FilterByCategory(IEnumerable<AccountRecord> records, string categoryName)
         {
             return records.Where(r => r.Category.Name == categoryName);
         }
@@ -293,12 +302,23 @@ namespace HomeAccountant_MicrosTestProject
             {
                 customDateDataGridView.DataSource = records
                     .GroupBy(r => r.Category.Name)
-                    .Select(g => new { Category = g.Key, Total = g.Sum(r => r.Price) }).ToList();
+                    .Select(g => new { Category = g.Key, Total = g.Sum(r => r.Amount) }).ToList();
             }
             else
             {
                 customDateDataGridView.DataSource = records.ToList();
             }
+
+            UpdateSaldoStatus(records);
+        }
+
+        private void UpdateSaldoStatus(IEnumerable<AccountRecord> records)
+        {
+            var saldo = records.Where(r => r.RecordType == AccountRecordType.Income).Sum(r => r.Amount) -
+               records.Where(r => r.RecordType == AccountRecordType.Expence).Sum(r => r.Amount);
+
+            saldoValueToolStripStatusLabel.Text = saldo.ToString("#,#");
+            saldoValueToolStripStatusLabel.ForeColor = saldo > 0 ? Color.Green : Color.Red;
         }
 
         private void CustomPeriodSelectionChange(object sender, EventArgs e)
@@ -365,9 +385,9 @@ namespace HomeAccountant_MicrosTestProject
 
             if (currentRow != null && currentRow.Index >= 0)
             {
-                var record = dayDataGridView.CurrentRow.DataBoundItem as ExpenceRecord;
+                var record = dayDataGridView.CurrentRow.DataBoundItem as AccountRecord;
 
-                dataConnection.RemoveExpenceRecord(ProfileName, record);
+                dataConnection.RemoveAccountRecord(ProfileName, record);
 
                 UpdateAddDataGrid();
             }
@@ -379,7 +399,7 @@ namespace HomeAccountant_MicrosTestProject
 
             if (currentRow != null && currentRow.Index >= 0)
             {
-                var record = dayDataGridView.CurrentRow.DataBoundItem as ExpenceRecord;
+                var record = dayDataGridView.CurrentRow.DataBoundItem as AccountRecord;
                 var result = new EditRecord(ProfileName, dataConnection, record).ShowDialog();
 
                 UpdateAddDataGrid();
@@ -390,7 +410,7 @@ namespace HomeAccountant_MicrosTestProject
         {
             if (newCategoryTextBox.Text.Length > 0)
             {
-                var existingCats = removeCategoryComboBox.DataSource as List<PurchaseCategory>;
+                var existingCats = removeCategoryComboBox.DataSource as List<RecordCategory>;
 
                 if (existingCats.Any(c => c.Name == newCategoryTextBox.Text))
                 {
@@ -398,7 +418,11 @@ namespace HomeAccountant_MicrosTestProject
                     return;
                 }
 
-                dataConnection.InsertCategory(ProfileName, new PurchaseCategory() { Name = newCategoryTextBox.Text });
+                if (addExpenceRadioButton.Checked)
+                    dataConnection.InsertExpenceCategory(ProfileName, new RecordCategory() { Name = newCategoryTextBox.Text });
+                else
+                    dataConnection.InsertIncomeCategory(ProfileName, new RecordCategory() { Name = newCategoryTextBox.Text });
+
                 newCategoryTextBox.Text = "";
                 BindCategoryItems();
             }
@@ -406,22 +430,25 @@ namespace HomeAccountant_MicrosTestProject
 
         private void removeCategoryButton_Click(object sender, EventArgs e)
         {
-            if (removeCategoryComboBox.Items.Count == 1)
-            {
-                MessageBox.Show($"{Locale.OneCategoryShouldRemain}", $"{Locale.Error}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            var category = removeCategoryComboBox.SelectedItem as PurchaseCategory;
+            var category = removeCategoryComboBox.SelectedItem as RecordCategory;
+            if (category is null) return;
 
             dataConnection.RemoveCategory(ProfileName, category);
 
             BindCategoryItems();
         }
 
-        private void generateRandom_Click(object sender, EventArgs e)
+        private async void generateRandom_Click(object sender, EventArgs e)
         {
+            generateRandom.Text = "Wait...";
             RandomDataGenerator.Generate(ProfileName, dataConnection);
+            await Task.Delay(4000);
+            generateRandom.Text = Locale.GenerateRandom;
+        }
+
+        private void recordTypeRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            BindCategoryItems();
         }
     }
 }

@@ -52,10 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataConnection\IDataConnection.cs" />
+    <Compile Include="DataConnection\IDbDataConnection.cs" />
     <Compile Include="DataConnection\LiteDbDataConnection.cs" />
-    <Compile Include="DataModel\ExpenceRecord.cs" />
-    <Compile Include="DataModel\PurchaseCategory.cs" />
+    <Compile Include="DataModel\AccountRecord.cs" />
+    <Compile Include="DataModel\RecordCategory.cs" />
     <Compile Include="DataModel\UserProfile.cs" />
     <Compile Include="EditRecord.cs">
       <SubType>Form</SubType>

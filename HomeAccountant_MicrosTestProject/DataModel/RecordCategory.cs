@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HomeAccountant_MicrosTestProject.DataModel
 {
-    public class PurchaseCategory
+    public class RecordCategory
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -18,7 +18,7 @@ namespace HomeAccountant_MicrosTestProject.DataModel
 
         public override bool Equals(object obj)
         {
-            PurchaseCategory cat = obj as PurchaseCategory;
+            RecordCategory cat = obj as RecordCategory;
             return cat != null && cat.Id == Id && cat.Name == Name;
         }
 

@@ -77,8 +77,6 @@ namespace HomeAccountant_MicrosTestProject
             this.Text = Locale.StartPageText;
 
             LocaleSelector.SetComboboxDataSource(languageComboBox, languageComboBox_SelectedIndexChanged);
-
-
         }
 
         private void languageComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -97,11 +95,12 @@ namespace HomeAccountant_MicrosTestProject
                 return;
             }
 
-            var defaultCategories = Locale.DefaultCategoryNames.Split(';');
+            var defaultExpenceCats = Locale.DefaultExpenceCategoryNames.Split(';');
+            var defaultIncomeCats = Locale.DefaultIncomeCategoryNames.Split(';');
 
             using (var dataConnection = new LiteDbDataConnection())
             {
-                dataConnection.CreateUserProfile(name, defaultCategories);
+                dataConnection.CreateUserProfile(name, defaultExpenceCats, defaultIncomeCats);
             }
 
             LoadHomePage(name);

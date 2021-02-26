@@ -14,11 +14,11 @@ namespace HomeAccountant_MicrosTestProject
 {
     public partial class EditRecord : Form
     {
-        IDataConnection data;
+        IDbDataConnection data;
         string profileName;
-        ExpenceRecord record;
+        AccountRecord record;
 
-        public EditRecord(string profileName, IDataConnection data, ExpenceRecord record)
+        public EditRecord(string profileName, IDbDataConnection data, AccountRecord record)
         {
             InitializeComponent();
 
@@ -28,12 +28,16 @@ namespace HomeAccountant_MicrosTestProject
             this.profileName = profileName;
             this.record = record;
 
-            categoryComboBox.DataSource = data.GetCategories(profileName).ToList();
-            categoryComboBox.DisplayMember = nameof(PurchaseCategory.Name);
+            categoryComboBox.DataSource = 
+                record.RecordType == AccountRecordType.Expence ?
+                data.GetExpenceCategories(profileName).ToList() :
+                data.GetIncomeCategories(profileName).ToList();
+
+            categoryComboBox.DisplayMember = nameof(RecordCategory.Name);
             categoryComboBox.SelectedIndex = GetSelectedComboboxIndex(record.Category);
 
             commentTextBox.Text = record.Comment;
-            priceNumericUpDown.Value = record.Price;
+            priceNumericUpDown.Value = record.Amount;
         }
 
         private void LocaleInit()
@@ -42,7 +46,7 @@ namespace HomeAccountant_MicrosTestProject
             button1.Text = Locale.SaveButtonText;
         }
 
-        private int GetSelectedComboboxIndex(PurchaseCategory category)
+        private int GetSelectedComboboxIndex(RecordCategory category)
         {
             int index = categoryComboBox.Items.IndexOf(category);
 
@@ -51,11 +55,11 @@ namespace HomeAccountant_MicrosTestProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            record.Category = categoryComboBox.SelectedItem as PurchaseCategory;
+            record.Category = categoryComboBox.SelectedItem as RecordCategory;
             record.Comment = commentTextBox.Text;
-            record.Price = priceNumericUpDown.Value;
+            record.Amount = priceNumericUpDown.Value;
 
-            data.UpdateExpenceRecord(profileName, record);
+            data.UpdateAccountRecord(profileName, record);
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
