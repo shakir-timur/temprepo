@@ -118,11 +118,11 @@ namespace HomeAccountant_MicrosTestProject
 
             var expSource = dataConnection.GetExpenceCategories(ProfileName).ToList();
             var incSource = dataConnection.GetIncomeCategories(ProfileName).ToList();
-            var allCats = expSource.Concat(incSource).ToList();
+            var allCats = expSource.Concat(incSource).ToArray();
 
             foreach (var box in boxes)
             {
-                box.DataSource = allCats;
+                box.DataSource = allCats.Clone();
                 box.DisplayMember = nameof(RecordCategory.Name);
                 if (box.Items.Count == 0) box.Text = "";
             }
@@ -253,8 +253,10 @@ namespace HomeAccountant_MicrosTestProject
             customDateTimePicker.ValueChanged += UpdateCustomPeriodTabOnValueChanged;
             customDateRadioButton.CheckedChanged += UpdateCustomPeriodTabOnValueChanged;
             customDateRadioButton.CheckedChanged += CustomPeriodSelectionChange;
+
             monthRadioButton.CheckedChanged += UpdateCustomPeriodTabOnValueChanged;
             yearRadioButton.CheckedChanged += UpdateCustomPeriodTabOnValueChanged;
+
             customShowAllCheckBox.CheckStateChanged += UpdateCustomPeriodTabOnValueChanged;
             customGroupCheckBox.CheckedChanged += UpdateCustomPeriodTabOnValueChanged;
             customCategoryComboBox.SelectedIndexChanged += UpdateCustomPeriodTabOnValueChanged;
