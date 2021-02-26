@@ -150,6 +150,9 @@
   <data name="DeleteProfileQuestion" xml:space="preserve">
     <value>Delete Profile and all it's data</value>
   </data>
+  <data name="DeleteRecordText" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="EditRecordText" xml:space="preserve">
     <value>Edit record</value>
   </data>

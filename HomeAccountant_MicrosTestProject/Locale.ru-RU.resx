@@ -150,6 +150,9 @@
   <data name="DeleteProfileQuestion" xml:space="preserve">
     <value>Удалить профиль и все данные</value>
   </data>
+  <data name="DeleteRecordText" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
   <data name="EditRecordText" xml:space="preserve">
     <value>Редактировать</value>
   </data>

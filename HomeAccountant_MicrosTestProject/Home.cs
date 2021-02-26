@@ -81,6 +81,9 @@ namespace HomeAccountant_MicrosTestProject
             changeLangLabel.Text = Locale.LanguageLabelText;
             addRecordButton.Text = Locale.AddExenceTabText;
 
+            editContextMenuItem.Text = Locale.EditRecordText;
+            deleteContextMenuItem.Text = Locale.DeleteRecordText;
+
             dangerZoneGroupBox.Text = Locale.DangerZoneGbText;
             categoryControlGroupBox.Text = Locale.CategoryControlGbText;
             deleteProfileButton.Text = Locale.DeleteProfileButtonText;

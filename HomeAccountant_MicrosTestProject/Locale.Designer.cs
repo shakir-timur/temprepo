@@ -160,6 +160,15 @@ namespace HomeAccountant_MicrosTestProject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteRecordText {
+            get {
+                return ResourceManager.GetString("DeleteRecordText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit record.
         /// </summary>
         internal static string EditRecordText {
