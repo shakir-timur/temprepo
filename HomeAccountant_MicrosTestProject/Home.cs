@@ -398,7 +398,7 @@ namespace HomeAccountant_MicrosTestProject
 
         private void UpdateCustomPeriodTabOnValueChanged(object sender, EventArgs e)
         {
-            
+
 
             UpdateCustomPeriodDataGrid();
             // TODO: decrease number of unnecessary updates
@@ -480,8 +480,8 @@ namespace HomeAccountant_MicrosTestProject
         {
             var grid = sender as DataGridView;
 
-            var styleRed = new DataGridViewCellStyle() { ForeColor = Color.Red };
-            var styleGrn = new DataGridViewCellStyle() { ForeColor = Color.Green };
+            var styleRed = new DataGridViewCellStyle() { ForeColor = Color.Red, Format = "#,#.00", Alignment = DataGridViewContentAlignment.MiddleRight };
+            var styleGrn = new DataGridViewCellStyle() { ForeColor = Color.Green, Format = "#,#.00", Alignment = DataGridViewContentAlignment.MiddleRight };
 
             var amountColumn = grid.Columns
                 .Cast<DataGridViewColumn>()
@@ -495,7 +495,7 @@ namespace HomeAccountant_MicrosTestProject
                 {
                     var r = (AccountRecord)row.DataBoundItem;
                     row.Cells[index].Style = r.RecordType == AccountRecordType.Income ? styleGrn : styleRed;
-                    row.Cells[index].Style.Format = "#,#.##";
+
                 }
 
                 return;
@@ -511,10 +511,9 @@ namespace HomeAccountant_MicrosTestProject
 
                     foreach (DataGridViewRow row in grid.Rows)
                     {
-                        var v = (string) row.Cells["Category"].Value;
+                        var v = (string)row.Cells["Category"].Value;
                         bool income = incomeCategories.Any(c => c == v);
                         row.Cells[index].Style = income ? styleGrn : styleRed;
-                        row.Cells[index].Style.Format = "#,#.##";
                     }
 
                     return;

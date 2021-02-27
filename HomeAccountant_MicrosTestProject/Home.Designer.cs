@@ -30,6 +30,7 @@ namespace HomeAccountant_MicrosTestProject
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Home));
             this.tabControlHome = new System.Windows.Forms.TabControl();
             this.addExpenceTab = new System.Windows.Forms.TabPage();
             this.IncomeRadioButton = new System.Windows.Forms.RadioButton();
@@ -172,6 +173,7 @@ namespace HomeAccountant_MicrosTestProject
             this.dayDataGridView.ReadOnly = true;
             this.dayDataGridView.RowHeadersWidth = 51;
             this.dayDataGridView.RowTemplate.Height = 24;
+            this.dayDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dayDataGridView.Size = new System.Drawing.Size(880, 389);
             this.dayDataGridView.TabIndex = 6;
             this.dayDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridView_DataBindingComplete);
@@ -322,6 +324,7 @@ namespace HomeAccountant_MicrosTestProject
             this.weekDataGridView.ReadOnly = true;
             this.weekDataGridView.RowHeadersWidth = 51;
             this.weekDataGridView.RowTemplate.Height = 24;
+            this.weekDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.weekDataGridView.Size = new System.Drawing.Size(871, 358);
             this.weekDataGridView.TabIndex = 4;
             this.weekDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridView_DataBindingComplete);
@@ -404,6 +407,7 @@ namespace HomeAccountant_MicrosTestProject
             this.customDateDataGridView.ReadOnly = true;
             this.customDateDataGridView.RowHeadersWidth = 51;
             this.customDateDataGridView.RowTemplate.Height = 24;
+            this.customDateDataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.customDateDataGridView.Size = new System.Drawing.Size(880, 348);
             this.customDateDataGridView.TabIndex = 12;
             this.customDateDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridView_DataBindingComplete);
@@ -717,6 +721,7 @@ namespace HomeAccountant_MicrosTestProject
             this.ClientSize = new System.Drawing.Size(924, 549);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tabControlHome);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(18, 500);
             this.Name = "Home";
             this.Text = "Accountant - Home";
