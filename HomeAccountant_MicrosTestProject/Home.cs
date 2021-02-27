@@ -435,7 +435,7 @@ namespace HomeAccountant_MicrosTestProject
         {
             if (newCategoryTextBox.Text.Length > 0)
             {
-                var existingCats = removeCategoryComboBox.DataSource as List<RecordCategory>;
+                var existingCats = removeCategoryComboBox.DataSource as RecordCategory[];
 
                 if (existingCats.Any(c => c.Name == newCategoryTextBox.Text))
                 {
