@@ -70,6 +70,8 @@ namespace HomeAccountant_MicrosTestProject
             this.customDateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.otherTab = new System.Windows.Forms.TabPage();
             this.categoryControlGroupBox = new System.Windows.Forms.GroupBox();
+            this.addIncomeRadioButton = new System.Windows.Forms.RadioButton();
+            this.addExpenceRadioButton = new System.Windows.Forms.RadioButton();
             this.removeCategoryButton = new System.Windows.Forms.Button();
             this.addCategoryButton = new System.Windows.Forms.Button();
             this.removeCategoryLabel = new System.Windows.Forms.Label();
@@ -84,8 +86,6 @@ namespace HomeAccountant_MicrosTestProject
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.saldoTextToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.saldoValueToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.addExpenceRadioButton = new System.Windows.Forms.RadioButton();
-            this.addIncomeRadioButton = new System.Windows.Forms.RadioButton();
             this.tabControlHome.SuspendLayout();
             this.addExpenceTab.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dayDataGridView)).BeginInit();
@@ -174,6 +174,7 @@ namespace HomeAccountant_MicrosTestProject
             this.dayDataGridView.RowTemplate.Height = 24;
             this.dayDataGridView.Size = new System.Drawing.Size(880, 389);
             this.dayDataGridView.TabIndex = 6;
+            this.dayDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridView_DataBindingComplete);
             // 
             // addDgwContextMenuStrip
             // 
@@ -323,6 +324,7 @@ namespace HomeAccountant_MicrosTestProject
             this.weekDataGridView.RowTemplate.Height = 24;
             this.weekDataGridView.Size = new System.Drawing.Size(871, 358);
             this.weekDataGridView.TabIndex = 4;
+            this.weekDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridView_DataBindingComplete);
             // 
             // weekGroupCheckBox
             // 
@@ -404,6 +406,7 @@ namespace HomeAccountant_MicrosTestProject
             this.customDateDataGridView.RowTemplate.Height = 24;
             this.customDateDataGridView.Size = new System.Drawing.Size(880, 348);
             this.customDateDataGridView.TabIndex = 12;
+            this.customDateDataGridView.DataBindingComplete += new System.Windows.Forms.DataGridViewBindingCompleteEventHandler(this.DataGridView_DataBindingComplete);
             // 
             // customNextButton
             // 
@@ -556,6 +559,28 @@ namespace HomeAccountant_MicrosTestProject
             this.categoryControlGroupBox.TabStop = false;
             this.categoryControlGroupBox.Text = "Category Control";
             // 
+            // addIncomeRadioButton
+            // 
+            this.addIncomeRadioButton.AutoSize = true;
+            this.addIncomeRadioButton.Location = new System.Drawing.Point(184, 46);
+            this.addIncomeRadioButton.Name = "addIncomeRadioButton";
+            this.addIncomeRadioButton.Size = new System.Drawing.Size(74, 21);
+            this.addIncomeRadioButton.TabIndex = 7;
+            this.addIncomeRadioButton.Text = "Income";
+            this.addIncomeRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // addExpenceRadioButton
+            // 
+            this.addExpenceRadioButton.AutoSize = true;
+            this.addExpenceRadioButton.Checked = true;
+            this.addExpenceRadioButton.Location = new System.Drawing.Point(86, 46);
+            this.addExpenceRadioButton.Name = "addExpenceRadioButton";
+            this.addExpenceRadioButton.Size = new System.Drawing.Size(83, 21);
+            this.addExpenceRadioButton.TabIndex = 6;
+            this.addExpenceRadioButton.TabStop = true;
+            this.addExpenceRadioButton.Text = "Expence";
+            this.addExpenceRadioButton.UseVisualStyleBackColor = true;
+            // 
             // removeCategoryButton
             // 
             this.removeCategoryButton.Location = new System.Drawing.Point(252, 143);
@@ -684,28 +709,6 @@ namespace HomeAccountant_MicrosTestProject
             this.saldoValueToolStripStatusLabel.Name = "saldoValueToolStripStatusLabel";
             this.saldoValueToolStripStatusLabel.Size = new System.Drawing.Size(15, 20);
             this.saldoValueToolStripStatusLabel.Text = "-";
-            // 
-            // addExpenceRadioButton
-            // 
-            this.addExpenceRadioButton.AutoSize = true;
-            this.addExpenceRadioButton.Checked = true;
-            this.addExpenceRadioButton.Location = new System.Drawing.Point(86, 46);
-            this.addExpenceRadioButton.Name = "addExpenceRadioButton";
-            this.addExpenceRadioButton.Size = new System.Drawing.Size(83, 21);
-            this.addExpenceRadioButton.TabIndex = 6;
-            this.addExpenceRadioButton.TabStop = true;
-            this.addExpenceRadioButton.Text = "Expence";
-            this.addExpenceRadioButton.UseVisualStyleBackColor = true;
-            // 
-            // addIncomeRadioButton
-            // 
-            this.addIncomeRadioButton.AutoSize = true;
-            this.addIncomeRadioButton.Location = new System.Drawing.Point(184, 46);
-            this.addIncomeRadioButton.Name = "addIncomeRadioButton";
-            this.addIncomeRadioButton.Size = new System.Drawing.Size(74, 21);
-            this.addIncomeRadioButton.TabIndex = 7;
-            this.addIncomeRadioButton.Text = "Income";
-            this.addIncomeRadioButton.UseVisualStyleBackColor = true;
             // 
             // Home
             // 

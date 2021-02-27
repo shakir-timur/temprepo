@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="DataConnection\IDbDataConnection.cs" />
     <Compile Include="DataConnection\LiteDbDataConnection.cs" />
+    <Compile Include="DataConnection\RequestMemo.cs" />
     <Compile Include="DataModel\AccountRecord.cs" />
     <Compile Include="DataModel\RecordCategory.cs" />
     <Compile Include="DataModel\UserProfile.cs" />

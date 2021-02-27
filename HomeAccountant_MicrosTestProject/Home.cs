@@ -17,6 +17,7 @@ namespace HomeAccountant_MicrosTestProject
     {
         IDbDataConnection dataConnection;
         Dictionary<TabPage, Action> pageChangeDelegates;
+        RequestMemo lastRequest;
 
         public Home(string profileName)
         {
@@ -181,6 +182,8 @@ namespace HomeAccountant_MicrosTestProject
             dayDataGridView.DataSource = records;
 
             UpdateSaldoStatus(records);
+
+            InvalidateRequestMemo();
         }
 
         private void UpdateWeekDataGrid() => UpdateWeekDataGrid(0);
@@ -217,6 +220,13 @@ namespace HomeAccountant_MicrosTestProject
             }
 
             UpdateSaldoStatus(records);
+
+            InvalidateRequestMemo();
+        }
+
+        private void InvalidateRequestMemo()
+        {
+            lastRequest = null;
         }
 
         IEnumerable<AccountRecord> GetRecordsFromTo(DateTime start, DateTime stop)
@@ -292,6 +302,17 @@ namespace HomeAccountant_MicrosTestProject
 
             customStartDateTimePicker.Value = start;
             customStopDateTimePicker.Value = stop - TimeSpan.FromDays(1);
+
+            RequestMemo memo = new RequestMemo() { Start = start, Stop = stop, ShowAll = customShowAllCheckBox.Checked, GroupBy = customGroupCheckBox.Checked };
+
+            if (lastRequest != null && lastRequest.Equals(memo))
+            {
+                return;
+            }
+            else
+            {
+                lastRequest = memo;
+            }
 
             var records = GetRecordsFromTo(start, stop);
 
@@ -377,6 +398,8 @@ namespace HomeAccountant_MicrosTestProject
 
         private void UpdateCustomPeriodTabOnValueChanged(object sender, EventArgs e)
         {
+            
+
             UpdateCustomPeriodDataGrid();
             // TODO: decrease number of unnecessary updates
         }
@@ -452,5 +475,52 @@ namespace HomeAccountant_MicrosTestProject
         {
             BindCategoryItems();
         }
+
+        private void DataGridView_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            var grid = sender as DataGridView;
+
+            var styleRed = new DataGridViewCellStyle() { ForeColor = Color.Red };
+            var styleGrn = new DataGridViewCellStyle() { ForeColor = Color.Green };
+
+            var amountColumn = grid.Columns
+                .Cast<DataGridViewColumn>()
+                .Where(c => c.HeaderText == nameof(AccountRecord.Amount)).SingleOrDefault();
+
+            if (amountColumn != null)
+            {
+                int index = grid.Columns.IndexOf(amountColumn);
+
+                foreach (DataGridViewRow row in grid.Rows)
+                {
+                    var r = (AccountRecord)row.DataBoundItem;
+                    row.Cells[index].Style = r.RecordType == AccountRecordType.Income ? styleGrn : styleRed;
+                    row.Cells[index].Style.Format = "#,#.##";
+                }
+
+                return;
+            }
+            else
+            {
+                var totalColumn = grid.Columns.Cast<DataGridViewColumn>().Where(c => c.HeaderText == "Total").SingleOrDefault();
+
+                if (totalColumn != null)
+                {
+                    var incomeCategories = dataConnection.GetIncomeCategories(ProfileName).Select(c => c.Name).ToList();
+                    int index = grid.Columns.IndexOf(totalColumn);
+
+                    foreach (DataGridViewRow row in grid.Rows)
+                    {
+                        var v = (string) row.Cells["Category"].Value;
+                        bool income = incomeCategories.Any(c => c == v);
+                        row.Cells[index].Style = income ? styleGrn : styleRed;
+                        row.Cells[index].Style.Format = "#,#.##";
+                    }
+
+                    return;
+                }
+            }
+        }
+
     }
 }
