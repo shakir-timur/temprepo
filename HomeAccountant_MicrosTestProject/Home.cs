@@ -469,6 +469,8 @@ namespace HomeAccountant_MicrosTestProject
             RandomDataGenerator.Generate(ProfileName, dataConnection);
             await Task.Delay(4000);
             generateRandom.Text = Locale.GenerateRandom;
+            InvalidateRequestMemo();
+
         }
 
         private void recordTypeRadioButton_CheckedChanged(object sender, EventArgs e)
